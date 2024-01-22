@@ -11,6 +11,7 @@ export default function VoterPage(props) {
     const Vote = async(event,index)=>{
         const Contract = new web3.eth.Contract(voting.abi, addr);
         await Contract.methods.voting(index).send({from:account});
+        window.location.reload();
     }
     const loadCandidateDetails = async () => {
         try {

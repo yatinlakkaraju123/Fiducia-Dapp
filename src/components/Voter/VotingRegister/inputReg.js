@@ -8,6 +8,8 @@ export default function InputReg(props) {
     const addr = props.scaddr;
     const newContract = new web3.eth.Contract(voting.abi, addr);
     await newContract.methods.register().send({from:account});
+
+    window.location.reload();
   }
   return (
     <div>

@@ -35,6 +35,9 @@ function ChairVotingHome() {
     const [candidatesNames, setCandidatesNames] = useState([]);
     const [candidatesImages, setCandidatesImages] = useState([]);
     const [candidatesdesc, setCandidatesdesc] = useState([]);
+    const [token,settoken] = useState('');
+    // alerts
+    const [eventCreationAlert,setEventCreationAlert] = useState(0);
     
     useEffect(
         ()=>{
@@ -162,19 +165,36 @@ function ChairVotingHome() {
 	{
 		token = Math.floor(100000 + Math.random() * 900000);
 	}
-    alert("token:"+token);
+    settoken(token);
+    setEventCreationAlert(1);
 	//console.log(addr);
 	axios.post("http://localhost:3001/deploy",{smartcontractaddress: addr,token}).then(result=>{
         //console.log(result)
     }).catch(err=>console.log(err))
-    try{
-       // Assuming you have the deployed contract instance stored in 'deployedContract'
-const registrationArray = columnDataArrays[columnArray[0]] || [];
+    const registrationArray = columnDataArrays[columnArray[0]] || [];
 console.log(registrationArray);
 const phoneArray = columnDataArrays[columnArray[1]]  || [];
 console.log(phoneArray);
 const emailArray = columnDataArrays[columnArray[2]]  || [];
 console.log(emailArray);
+    try {
+        const response = await axios.post('http://localhost:3001/sendTokens', {
+            emailArray,
+          token,
+          EventName:FormDetails.eventName
+        });
+  
+        if (response.data.success) {
+          console.log('Tokens sent successfully');
+        } else {
+          console.error('Failed to send tokens');
+        }
+      } catch (error) {
+        console.error('Error sending tokens:', error);
+      }
+    try{
+       // Assuming you have the deployed contract instance stored in 'deployedContract'
+
 
 // Assuming you have the correct data in candidatesdesc and FormDetails
 
@@ -191,15 +211,7 @@ await deployedContract.methods.set(
   FormDetails.stopvotingTime,
   FormDetails.startresultTime
 ).send({ from: accounts[0] });
-    console.log(await deployedContract.methods.RegNo(0).call())
-    console.log(await deployedContract.methods.Phone(0).call());   
-    console.log(await deployedContract.methods.Email(0).call());   
-    console.log(await deployedContract.methods.candidatescount().call());       
-    console.log(await deployedContract.methods.StartRegisterTime().call());   
-    console.log(await deployedContract.methods.StopRegisterTime().call()); 
-    console.log(await deployedContract.methods.StartVotingTime().call()); 
-    console.log(await deployedContract.methods.StopVotingTime().call()); 
-    console.log(await deployedContract.methods.StartResultTime().call());   
+     
     
     }catch(error)
     {
@@ -209,7 +221,7 @@ await deployedContract.methods.set(
 
         
         
-       
+    window.location.reload();  
 
 
 
@@ -221,6 +233,12 @@ await deployedContract.methods.set(
             <ChairHomeNavbar />
            
             <div className="container">
+                {eventCreationAlert===1 && <>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+ Congratulations the voting event has been created. the token is {token}.. Now please accept the next transaction to set the voting event which the input details
+</div>
+                </>}
+
                 <h2 style={{ textAlign: "center" }}>Enter the form for the voting event</h2>
                 <form onSubmit={submitForm} > 
                     <div class="input-group mb-3">
