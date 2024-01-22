@@ -1,10 +1,13 @@
 import VoterHomeNavbar from "../navbars/VoterHomeNavbar";
+import InputToken from './VotingVoter/inputToken'
+
 function voterVotingVote()
 {
+   
     return(
         <>
             <VoterHomeNavbar/>
-            <h4>Voting</h4>
+            <InputToken/>
         </>
     )
 }
