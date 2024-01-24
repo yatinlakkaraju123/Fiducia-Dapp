@@ -27,11 +27,11 @@ export default function Inputauth(props) {
     { const isRegistered = await newContract.methods.getIsRegNoRegistered(arr.indexOf(regNo)).call();
       if(isRegistered==true)
       {
-        alert("already registered");
+        alert(" the registration number is already registered as a voter please try another one");
       }
       else
       {
-        alert("valid voter");
+        
         await newContract.methods.RegisterRegNo(arr.indexOf(regNo)).send({from:account});
         setInp(1);
 

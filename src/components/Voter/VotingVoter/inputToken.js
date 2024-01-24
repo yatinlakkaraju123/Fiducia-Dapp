@@ -33,16 +33,16 @@ export default function InputToken() {
             const isRegistered = await newContract.methods.isRegistered(account).call();
             if(isVoted==true)
             {
-              alert("already voted");
+              alert("this account has  already voted");
             }
             else if(isVoted===false && isRegistered===true)
             {
-              alert("can vote");
+             
               setInp(1);
             }
             else
             {
-              alert("is not registered");
+              alert("is not registered as a voter");
             }
             
           }
@@ -70,7 +70,7 @@ export default function InputToken() {
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
       </form></>}
-      {inp===1 && <VoterPage scaddr ={inputSCadd}/>}
+      {inp===1 && <VoterPage scaddr ={inputSCadd} Token={inputToken}/>}
 
     </div>
   )

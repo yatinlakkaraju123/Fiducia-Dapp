@@ -5,6 +5,7 @@ function voterVotingResults()
     return(
         <>
             <VoterHomeNavbar/>
+            <h3>Results Page</h3>
             <InputToken/>
         </>
     )

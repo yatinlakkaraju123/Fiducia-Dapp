@@ -35,11 +35,11 @@ export default function InputToken() {
         console.log(account);
         if(isRegistered==true)
         {
-          alert("already registered");
+          alert("the account has already been registered as a voter please try with different account");
         }
         else
         {
-          alert("not already registered");
+          
           setInp(1);
         }
         

@@ -7,6 +7,7 @@ function voterVotingRegister()
     }
     return(<>
         <VoterHomeNavbar/>
+        <h3>Register Page</h3>
         <InputToken/>
     </>);
 }
