@@ -8,6 +8,7 @@ import { Form } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 export default function OtherInput(props) {
+    const [ipfs,setIpfs] = useState("")
     const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
     const [showModal, setShowModal] = useState(false);
     const [token, settoken] = useState('');
@@ -112,7 +113,11 @@ export default function OtherInput(props) {
         })),
       };
         const jsonString = JSON.stringify(jsonData, null, 2);
-axios.post("http://http://localhost:3001/sendJSON",{_jsonString:jsonString}).then(result=>{}).catch(error=>console.log(error))
+axios.post("http://localhost:3001/sendJSON",{_jsonString:jsonString,token:2}).then(result=>{}).catch(error=>console.log(error.response.data))
+
+ await axios.post('http://localhost:3001/sendIPFS').then(result=>{setIpfs(String(result.data.IPFS))
+console.log(ipfs)}).catch(err=>console.log(err));
+
 const registrationArray = columnDataArrays[columnArray[0]] || [];
         //console.log(registrationArray);
         const phoneArray = columnDataArrays[columnArray[1]] || [];
@@ -128,9 +133,11 @@ const accounts = await web3.eth.getAccounts();
 
 // Deploy the contract
 const deployedContract = await myContract.deploy({ data: Feedback.bytecode,
-    arguments: [1,registrationArray,phoneArray,emailArray,Times,No]  })
+    arguments: [ipfs,registrationArray,phoneArray,emailArray,Times,No]  })
     .send({ from: accounts[0] });
 //console.log('Contract deployed at:', deployedContract.options.address);
+const i = await deployedContract.methods.Ipfs().call()
+console.log("from smart contract:"+i);
 const token = Math.floor(100000 + Math.random() * 900000);
 while (tokenArray.indexOf(token) != -1) {
     token = Math.floor(100000 + Math.random() * 900000);
