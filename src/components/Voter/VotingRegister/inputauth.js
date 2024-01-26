@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import voting from '../../chair/voting.json';
 import UseBlockchain from '../../../UseBlockchain.js';
-import InputReg from "./inputReg"
+import OTP from './OTP';
+import {auth} from "../../../firebase"
+import { getAuth,RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
 export default function Inputauth(props) {
   const [regNo, setRegNo] = useState('');
   const [inp,setInp] = useState(0);
+  const [phone,setPhone] = useState("");
+  const [regIndx,setRegIndx] = useState(0)
+  //const [auth,setAuth] =useState(null);
+ 
   const addr = props.scaddr;
   const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
 
-  
-  
+
+
   
 
   const check = async (event) => {
@@ -18,10 +24,14 @@ export default function Inputauth(props) {
     
     const arr = []
     const RegLength = await newContract.methods.getLengthRegNo().call();
+    
+    const phoneArr = []
     for(let i=0;i<RegLength;i++)
     {
       const regNoValues = await newContract.methods.RegNo(i).call();
+      const phoneValues = await newContract.methods.Phone(i).call();
       arr.push(regNoValues);
+      phoneArr.push(phoneValues)
     }
     if(arr.indexOf(regNo)!=-1)
     { const isRegistered = await newContract.methods.getIsRegNoRegistered(arr.indexOf(regNo)).call();
@@ -30,10 +40,18 @@ export default function Inputauth(props) {
         alert(" the registration number is already registered as a voter please try another one");
       }
       else
-      {
+      { const indx = arr.indexOf(regNo);
+        const phoneNumber = phoneArr[indx]
+        //console.log(phoneNumber)
+        const normalizedNumber = phoneNumber.replace(/^0+/, '');
+        setPhone('+91' + normalizedNumber);
         
-        await newContract.methods.RegisterRegNo(arr.indexOf(regNo)).send({from:account});
-        setInp(1);
+   
+        //setInp(2)
+       
+       //await newContract.methods.RegisterRegNo(arr.indexOf(regNo)).send({from:account});
+       setRegIndx(arr.indexOf(regNo))
+       setInp(1)
 
       }
      
@@ -66,7 +84,14 @@ export default function Inputauth(props) {
         </div>
       </form>
       </>}
-      {inp===1 && <InputReg scaddr={props.scaddr}/>}
+     
+      {inp===1 && <OTP data={
+        {
+          scaddr:props.scaddr,
+          Phone:phone,
+          indx:regIndx
+        }
+      }/>}
     
     </div>
   );
