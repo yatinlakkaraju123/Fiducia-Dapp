@@ -8,6 +8,7 @@ import { Form } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 export default function OtherInput(props) {
+   
     const [ipfs,setIpfs] = useState("")
     const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
     const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,67 @@ export default function OtherInput(props) {
     const [data, setData] = useState();
     const [columnArray, setColumnArray] = useState([]);
     const [valueArray, setValueArray] = useState([]);
+    useEffect(() => {
+        console.log(ipfs);
+        const deployContract = async () => {
+            try
+            {
+                const registrationArray = columnDataArrays[columnArray[0]] || [];
+                //console.log(registrationArray);
+                const phoneArray = columnDataArrays[columnArray[1]] || [];
+                //console.log(phoneArray);
+                const emailArray = columnDataArrays[columnArray[2]] || [];
+                //console.log(emailArray);
+                const Times = [FormDetails.startregisterTime,FormDetails.stopregisterTime,FormDetails.startvotingTime,FormDetails.stopvotingTime
+                ,FormDetails.startresultTime];
+        const myContract = new web3.eth.Contract(Feedback.abi);
+        
+        // Get the user's accounts
+        const accounts = await web3.eth.getAccounts();
+        
+        // Deploy the contract
+        const deployedContract = await myContract.deploy({ data: Feedback.bytecode,
+            arguments: [ipfs,registrationArray,phoneArray,emailArray,Times,No]  })
+            .send({ from: accounts[0] });
+        //console.log('Contract deployed at:', deployedContract.options.address);
+        const i = await deployedContract.methods.Ipfs().call()
+        console.log("from smart contract:"+i);
+        const token = Math.floor(100000 + Math.random() * 900000);
+while (tokenArray.indexOf(token) != -1) {
+    token = Math.floor(100000 + Math.random() * 900000);
+}
+const addr = deployedContract.options.address;
+settoken(token);
+axios.post("http://localhost:3001/deploy", { smartcontractaddress: addr, token }).then(result => {
+    //console.log(result)
+}).catch(err => console.log(err))
+setShowModal(true);
+try {
+    const response = await axios.post('http://localhost:3001/sendTokensFeedback', {
+        emailArray,
+        token,
+        EventName: EventName
+    });
+
+    if (response.data.success) {
+        console.log('Tokens sent successfully');
+    } else {
+        console.error('Failed to send tokens');
+    }
+} catch (error) {
+    console.error('Error sending tokens:', error);
+}
+
+            }catch(error)
+            {
+                console.log(error);
+            }
+        }
+        if (ipfs !== "") {
+            deployContract()
+        }
+    
+      }, [ipfs]);
     useEffect(
         () => {
             axios.get("http://localhost:3001").then(result => {
@@ -113,56 +175,26 @@ export default function OtherInput(props) {
         })),
       };
         const jsonString = JSON.stringify(jsonData, null, 2);
-axios.post("http://localhost:3001/sendJSON",{_jsonString:jsonString,token:2}).then(result=>{}).catch(error=>console.log(error.response.data))
+await axios.post("http://localhost:3001/sendJSON",{_jsonString:jsonString,token:2}).then(result=>{
+    console.log(result.data.IPFS);
+    const updatedIpfs = String(result.data.IPFS);
+    setIpfs(updatedIpfs);
+    console.log(updatedIpfs);  
+}).catch(error=>console.log(error.response.data))
 
- await axios.post('http://localhost:3001/sendIPFS').then(result=>{setIpfs(String(result.data.IPFS))
-console.log(ipfs)}).catch(err=>console.log(err));
-
-const registrationArray = columnDataArrays[columnArray[0]] || [];
-        //console.log(registrationArray);
-        const phoneArray = columnDataArrays[columnArray[1]] || [];
-        //console.log(phoneArray);
-        const emailArray = columnDataArrays[columnArray[2]] || [];
-        //console.log(emailArray);
-        const Times = [FormDetails.startregisterTime,FormDetails.stopregisterTime,FormDetails.startvotingTime,FormDetails.stopvotingTime
-        ,FormDetails.startresultTime];
-const myContract = new web3.eth.Contract(Feedback.abi);
-
-// Get the user's accounts
-const accounts = await web3.eth.getAccounts();
-
-// Deploy the contract
-const deployedContract = await myContract.deploy({ data: Feedback.bytecode,
-    arguments: [ipfs,registrationArray,phoneArray,emailArray,Times,No]  })
-    .send({ from: accounts[0] });
-//console.log('Contract deployed at:', deployedContract.options.address);
-const i = await deployedContract.methods.Ipfs().call()
-console.log("from smart contract:"+i);
-const token = Math.floor(100000 + Math.random() * 900000);
-while (tokenArray.indexOf(token) != -1) {
-    token = Math.floor(100000 + Math.random() * 900000);
-}
-const addr = deployedContract.options.address;
-settoken(token);
-axios.post("http://localhost:3001/deploy", { smartcontractaddress: addr, token }).then(result => {
-    //console.log(result)
-}).catch(err => console.log(err))
-setShowModal(true);
-try {
-    const response = await axios.post('http://localhost:3001/sendTokensFeedback', {
-        emailArray,
-        token,
-        EventName: EventName
-    });
-
-    if (response.data.success) {
-        console.log('Tokens sent successfully');
-    } else {
-        console.error('Failed to send tokens');
-    }
+/*try {
+    const result = await axios.post('http://localhost:3001/sendIPFS');
+    const updatedIpfs = String(result.data.IPFS);
+    setIpfs(updatedIpfs);
+    console.log(updatedIpfs);  // Log the updated IPFS hash
+    // Perform any other actions that depend on the updated IPFS hash
 } catch (error) {
-    console.error('Error sending tokens:', error);
+    console.error('Error fetching IPFS:', error);
 }
+console.log(ipfs)*/
+
+
+
     }
     return (
         <div>

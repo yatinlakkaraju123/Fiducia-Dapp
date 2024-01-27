@@ -85,8 +85,11 @@ const transporter = nodemailer.createTransport({
 app.post('/sendJSON',async(req,res)=>{
   const {_jsonString,token} = req.body;
   jsonString = JSON.parse(_jsonString);
+  const r =  await pinata.pinJSONToIPFS(jsonString)
+   const ipfs = r.IpfsHash
+   res.json({IPFS:r.IpfsHash})
   //console.log(jsonString)
-  try {
+  /*try {
    const r =  await pinata.pinJSONToIPFS(jsonString)
    const ipfs = r.IpfsHash
    app.post('/sendIPFS',(req,res)=>{
@@ -98,10 +101,10 @@ app.post('/sendJSON',async(req,res)=>{
   } catch (error) {
     console.error('Error pinning to IPFS:', error);
     res.status(500).json({ success: false, error: 'Error pinning to IPFS' });
-  }
+  }*/
   //pinFileToIPFS()
 })
-const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJhOTU4YmI3Yi05ZWFiLTQ0NDUtYWY1Yy1hNTk5MzQzOGM1MDEiLCJlbWFpbCI6Imxha2thcmFqdXlhdGluQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI4ZmFhNDUwNjUyNDkxOWY1Y2JiZiIsInNjb3BlZEtleVNlY3JldCI6IjJhZjY5ZjUzMjIwYjgwZDk4MmVkY2Y2OGQ4YjY0YWJiN2QwZjY4NzRjMmQ4Y2MxNTVjNjJhOTg4NGIzYTc5YTciLCJpYXQiOjE3MDYwOTM1Nzd9.ng9C8DhZ-7AlC_rKSyUlG_UCefKYGCpGAzqeEvd6ZTA"
+const JWT = mypasswords.JWT
 const ipfsHash=""
 const pinFileToIPFS = async (token,jsonString) => {
    

@@ -1,9 +1,9 @@
-import InputReg from "./inputReg"
+import InputReg from "./Reg"
 import React,{useEffect, useState} from 'react'
-import voting from '../../chair/voting.json';
+import feedback from '../../../chair/Feedback.json';
 import { getAuth } from "firebase/auth";
 import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
-import UseBlockchain from '../../../UseBlockchain.js';
+import UseBlockchain from '../../../../UseBlockchain.js';
 export default function OTP(props) {
     const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
     const phone = props.data.Phone;
@@ -71,8 +71,8 @@ confirmationResult.confirm(code).then(async(result) => {
   const user = result.user;
   console.log(user);
   console.log("done");
-  const newContract = new web3.eth.Contract(voting.abi, addr);
-  await newContract.methods.RegisterRegNo(Indx).send({from:account});
+  //const newContract = new web3.eth.Contract(feedback.abi, addr);
+ // await newContract.methods.RegisterRegNo(Indx).send({from:account});
   setInp(1)
   // ...
 }).catch((error) => {
@@ -82,14 +82,20 @@ confirmationResult.confirm(code).then(async(result) => {
     }
   return (
     <div>
+      <div id="sign-in-button"></div>
         {inp===0 && <>
             <h2>Enter OTP</h2>
         <form onSubmit={OnSubmitOTP}>
-        <div id="sign-in-button"></div>
+        
             <input type="number" name="otp" placeholder='otp' onChange={handleChange}required></input>
             <button type='submit'>Submit</button>
         </form></>}
-        {inp===1 &&<InputReg scaddr={addr}/> }
+        {inp===1 &&<InputReg data={
+          {
+            scaddr:addr,
+            regIndx :Indx,}
+          }
+        /> }
 
         
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import voting from '../../chair/voting.json';
-import UseBlockchain from '../../../UseBlockchain.js';
+import feedback from '../../../chair/Feedback.json';
+import UseBlockchain from '../../../../UseBlockchain.js';
 import OTP from './OTP';
 
 export default function Inputauth(props) {
@@ -19,7 +19,7 @@ export default function Inputauth(props) {
 
   const check = async (event) => {
     event.preventDefault();
-    const newContract = new web3.eth.Contract(voting.abi, addr);
+    const newContract = new web3.eth.Contract(feedback.abi, addr);
     
     const arr = []
     const RegLength = await newContract.methods.getLengthRegNo().call();

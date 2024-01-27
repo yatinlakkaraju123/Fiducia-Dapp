@@ -1,10 +1,11 @@
 import React from 'react'
 import ChairFeedbackNavbar from '../navbars/ChairFeedbackNavbar'
+import ResultsToken from './Feedback/ResultsToken'
 export default function Results() {
   return (
     <div>
       <ChairFeedbackNavbar/>
-      <h3>Results</h3>
+      <ResultsToken/>
     </div>
   )
 }
