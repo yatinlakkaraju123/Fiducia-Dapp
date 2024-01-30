@@ -7,7 +7,7 @@ export default function Inputauth(props) {
   const [regNo, setRegNo] = useState('');
   const [inp,setInp] = useState(0);
   const [phone,setPhone] = useState("");
-  const [regIndx,setRegIndx] = useState(0)
+  const [regIndx1,setRegIndx] = useState(0)
   //const [auth,setAuth] =useState(null);
  
   const addr = props.scaddr;
@@ -41,7 +41,8 @@ export default function Inputauth(props) {
       else
       { const indx = arr.indexOf(regNo);
         const phoneNumber = phoneArr[indx]
-        //console.log(phoneNumber)
+        console.log(indx);
+        console.log(phoneNumber)
         const normalizedNumber = phoneNumber.replace(/^0+/, '');
         setPhone('+91' + normalizedNumber);
         
@@ -49,7 +50,8 @@ export default function Inputauth(props) {
         //setInp(2)
        
        //await newContract.methods.RegisterRegNo(arr.indexOf(regNo)).send({from:account});
-       setRegIndx(arr.indexOf(regNo))
+       setRegIndx(indx)
+       console.log(regIndx1)
        setInp(1)
 
       }
@@ -88,7 +90,7 @@ export default function Inputauth(props) {
         {
           scaddr:props.scaddr,
           Phone:phone,
-          indx:regIndx
+          regIndx:regIndx1
         }
       }/>}
     

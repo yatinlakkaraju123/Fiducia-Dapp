@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {ABI} from "./config.js"
 import Web3 from 'web3';
-const contractAddress = "0x34F038b94E76F15840942ADcC622CdebbbE545F1"
+const contractAddress = "0xE72E1534a2D99F2c96bB0044B938EFE84FDD6bCC"
 export default function UseBlockchain()
 {
     const [web3, setWeb3] = useState(null);

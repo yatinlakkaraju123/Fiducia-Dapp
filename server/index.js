@@ -23,7 +23,7 @@ app.get('/',(req,res)=>{
 app.post("/deploy",(req,res)=>{
     SCmodel.create(req.body).then(scinfo=>{
         res.json(scinfo)
-        console.log(scinfo)
+        //console.log(scinfo)
         
     }
         ).catch(err=>res.json(err))

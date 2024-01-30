@@ -8,7 +8,7 @@ export default function OTP(props) {
     const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
     const phone = props.data.Phone;
     const addr = props.data.scaddr;
-    const Indx = props.data.indx;
+    const Indx = props.data.regIndx;
     const auth = getAuth();
 auth.languageCode = 'it';
     const [FormDetails,setFormDetails] = useState({
@@ -38,7 +38,7 @@ auth.languageCode = 'it';
             },
             defaultCountry:"IN"
           });
-
+          console.log(Indx);
     }
     const onSignInSubmit = ()=>{
         //e.preventDefault();
@@ -84,6 +84,7 @@ confirmationResult.confirm(code).then(async(result) => {
     <div>
       <div id="sign-in-button"></div>
         {inp===0 && <>
+          
             <h2>Enter OTP</h2>
         <form onSubmit={OnSubmitOTP}>
         

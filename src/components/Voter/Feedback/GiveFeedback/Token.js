@@ -38,6 +38,7 @@ export default function Token() {
             else
             {
               alert("is not registered ");
+              setInp(1);
             }
             
           }

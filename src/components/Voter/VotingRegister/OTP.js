@@ -82,6 +82,7 @@ confirmationResult.confirm(code).then(async(result) => {
     }
   return (
     <div>
+      <div id="sign-in-button"></div>
         {inp===0 && <>
             <h2>Enter OTP</h2>
         <form onSubmit={OnSubmitOTP}>

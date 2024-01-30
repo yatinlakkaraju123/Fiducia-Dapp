@@ -13,11 +13,18 @@ export default function Reg(props) {
   const submit = async(event)=>{
     event.preventDefault();
     const addr = props.data.scaddr;
-    const regIndx = props.data.regIndx;
+    const regIndx1 = props.data.regIndx;
     const newContract = new web3.eth.Contract(feedback.abi, addr);
     
-    await newContract.methods.register(regIndx).send({from:account});
-    setShowModal(true);
+    try
+    { console.log(regIndx1);
+      await newContract.methods.register(regIndx1).send({from:account});
+      setShowModal(true);
+    }catch(error)
+    {
+      console.log(error); 
+    }
+    
     
   }
   return (

@@ -73,18 +73,18 @@ export default function ResultsView(props) {
   
       try {
         const answersList = await Promise.all(promises);
-  
+        console.log("answers list:"+answersList);
         const updatedAnswers = answersList.map((answers1, i) => {
           if (feedback[i].type === 'options') {
             const optionCount = {
+              0: 0,
               1: 0,
               2: 0,
-              3: 0,
-              4: 0
+              3: 0
             };
   
             answers1.forEach(answer => {
-              if (answer >= 1 && answer <= 4) {
+              if (answer >= 0 && answer <= 3) {
                 optionCount[answer]++;
               }
             });
@@ -119,7 +119,7 @@ export default function ResultsView(props) {
               {value.type === 'options' && (
                 <>
                   {value.options.map((innervalue, innerindex) => (
-                    <p key={innerindex}>{innervalue}: {answers[index][innerindex+1]}</p>
+                    <p key={innerindex}>{innervalue}: {answers[index][innerindex]}</p>
                   ))}
                 </>
               )}
