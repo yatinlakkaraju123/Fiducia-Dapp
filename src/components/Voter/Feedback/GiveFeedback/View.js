@@ -75,18 +75,25 @@ export default function View(props) {
 
     return (
         <div>
-            <>  <form onSubmit={submit}>
-                <div class="input-group mb-3">
-                    <button type="submit" class="btn btn-primary">Load Feedback Form</button>
-                </div>
-            </form></>
+            <>  
+            <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <button type="button" onClick={submit} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Load Feedback form</button>
+            </div>
+            </div>
+            </div></>
             {inp === 1 && <>
-                <form onSubmit={view}>
-                    {feedback.map((value, index) => (
-                        <div>
-                            <h3>{feedback[index].question}</h3>
+                <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            {feedback.map((value, index) => (
+                          <div className="flex flex-col py-3 bg-white">
+                          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-black max-md:flex-wrap max-md:max-w-full">
+                            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+                            <h3 className="self-start mt-3">{feedback[index].question}</h3>
                             {value.type === "text" && <>
-                                <input class="form-control form-control-sm" onChange={(e)=>{
+                                <input className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" onChange={(e)=>{
                                     const arr = ans
                                     arr[index] = e.target.value
                                     setAns(arr)
@@ -97,13 +104,13 @@ export default function View(props) {
                                 {value.options.map((innervalue, innerindex) => (
                                     <>
                                         <div class="form-check">
-                                            <input class="form-check-input" value={innerindex} type="radio" onChange={(e)=>{
+                                            <input class="" value={innerindex} type="radio" onChange={(e)=>{
                                     const arr = ans
                                     arr[index] = e.target.value
                                     setAns(arr)
 
-                                }} name="flexRadioDefault" id="flexRadioDefault1" />
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                }} />
+                                            <label className="self-start mt-3">
                                                 {innervalue}
                                             </label>
                                         </div>
@@ -111,12 +118,16 @@ export default function View(props) {
                                 ))}
                             </>}
                         </div>
+                        </div>
+                        </div>
 
                     ))}
-                      <div class="input-group mb-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                      
+                    <button type="submit" onClick={view} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Submit</button>
                 </div>
-                </form>
+                </div>
+                </div>
+               
             </>}
 
         </div>

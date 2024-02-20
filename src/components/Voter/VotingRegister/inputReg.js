@@ -15,29 +15,23 @@ export default function InputReg(props) {
     const addr = props.scaddr;
     const newContract = new web3.eth.Contract(voting.abi, addr);
     await newContract.methods.register().send({from:account});
-    setShowModal(true);
+    alert("Congratulations you have registered yourselves for voting")
     
   }
   return (
-    <div>
-        <form onSubmit={submit}>
-        <button type="submit" className="btn btn-primary">Register</button>
-        </form>
-        <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Registration Done</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Congratulations you have registered for voting</p>
-        </Modal.Body>
-        <Modal.Footer>
-         
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+    
+          <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <button type='submit' onClick={submit} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Register</button>
+            </div>
+            
+              </div>
+              </div>
+              
+            
+       
 
-    </div>
+   
   )
 }

@@ -61,19 +61,19 @@ export default function ResultsView(props) {
 
   const submit = async (event) => {
     event.preventDefault();
-  
+
     if (web3Initialized) {
       const newContract = new web3.eth.Contract(feedback1.abi, addr);
       const promises = [];
-  
+
       for (let i = 0; i < no; i++) {
         const promise = newContract.methods.getAnswersForQid(i).call();
         promises.push(promise);
       }
-  
+
       try {
         const answersList = await Promise.all(promises);
-        console.log("answers list:"+answersList);
+        console.log("answers list:" + answersList);
         const updatedAnswers = answersList.map((answers1, i) => {
           if (feedback[i].type === 'options') {
             const optionCount = {
@@ -82,19 +82,19 @@ export default function ResultsView(props) {
               2: 0,
               3: 0
             };
-  
+
             answers1.forEach(answer => {
               if (answer >= 0 && answer <= 3) {
                 optionCount[answer]++;
               }
             });
-  
+
             return optionCount;
           } else {
             return answers1;
           }
         });
-  
+
         setAnswers(prevAnswers => [...prevAnswers, ...updatedAnswers]);
         setInp(1);
       } catch (error) {
@@ -102,39 +102,48 @@ export default function ResultsView(props) {
       }
     }
   };
-  
+
 
   return (
     <div>
-      <form onSubmit={submit}>
-        <div className="input-group mb-3">
-          <button type="submit" className="btn btn-primary">Load Results</button>
+      <div className="flex flex-col py-3 bg-white">
+        <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+          <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <button type="submit" onClick={submit} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Load Results</button>
+          </div>
         </div>
-      </form>
+      </div>
+
       {inp === 1 && (
         <>
-          {feedback.map((value, index) => (
-            <div key={index}>
-              <h6>{value.question}</h6>
-              {value.type === 'options' && (
-                <>
-                  {value.options.map((innervalue, innerindex) => (
-                    <p key={innerindex}>{innervalue}: {answers[index][innerindex]}</p>
-                  ))}
-                </>
-              )}
-              {value.type === 'text' && (
-                <>
-                  {answers[index].map((answer, innerindex) => (
-                    <p key={innerindex}>{answer}</p>
-                  ))}
-                </>
-              )}
-            </div>
-          ))}
+          <div className="flex flex-col py-3 bg-white">
+            <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-xl text-black max-md:flex-wrap max-md:max-w-full">
+              <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+                {feedback.map((value, index) => (
+                  
+
+                        <div key={index}>
+                          <h6 className="self-start mt-3">{value.question}</h6>
+                          {value.type === 'options' && (
+                            <>
+                              {value.options.map((innervalue, innerindex) => (
+                                <p key={innerindex} className="self-start mt-3">{innervalue}: {answers[index][innerindex]}</p>
+                              ))}
+                            </>
+                          )}
+                          {value.type === 'text' && (
+                            <>
+                              {answers[index].map((answer, innerindex) => (
+                                <p key={innerindex} className="self-start mt-3">{answer}</p>
+                              ))}
+                            </>
+                          )}
+                        </div>
+                        )
+         )}</div></div></div>
         </>
       )}
-    </div>
-  );
+            </div>
+            );
 }
 

@@ -35,7 +35,14 @@ export default function Results(props) {
   return (
     <>
 
-{inp===0 && <><button type="button" class="btn btn-primary" onClick={LoadResults}>Load Results</button>
+{inp===0 && <>
+  <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <button type="button" onClick={LoadResults} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Load Results</button>
+            </div>
+            </div>
+            </div>
 </>}
 
 {inp===1 && <><DynamicPieChart data={PieChartdata} /></>}

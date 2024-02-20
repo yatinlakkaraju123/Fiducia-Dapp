@@ -84,12 +84,17 @@ confirmationResult.confirm(code).then(async(result) => {
     <div>
       <div id="sign-in-button"></div>
         {inp===0 && <>
-            <h2>Enter OTP</h2>
-        <form onSubmit={OnSubmitOTP}>
-        <div id="sign-in-button"></div>
-            <input type="number" name="otp" placeholder='otp' onChange={handleChange}required></input>
-            <button type='submit'>Submit</button>
-        </form></>}
+          <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <div className="self-start mt-3">Enter OTP</div>
+            <input type="number" name="otp" className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" onChange={handleChange}required></input>
+            <button type='submit' onClick={OnSubmitOTP} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Submit</button>
+            </div>
+            </div>
+            </div>
+           
+      </>}
         {inp===1 &&<InputReg scaddr={addr}/> }
 
         

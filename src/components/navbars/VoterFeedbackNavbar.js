@@ -5,38 +5,17 @@ export default function VoterFeedbackNavbar() {
     const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
     return (
 
-        <div className="container-fluid">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
+        <div className="">
 
-                    <Link to="/"><a class="navbar-brand" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
-                    </svg></a></Link>
-
-
-
-
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <Link to="/Feedback/Register" class="nav-link">Register</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to="/Feedback/GiveFeedback" class="nav-link">Give feedback</Link>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <button type='button' style={{ marginRight: "0px", }} className='btn btn-info ml-auto mr-1' onClick={loadWeb3}>Connect</button>
-                            </li>
-
-
-
-                        </ul>
-
-
-                    </div>
-                </div>
-            </nav>
+<div className="flex gap-5 justify-between py-8 pr-12 pl-5 text-2xl text-black whitespace-nowrap bg-white max-md:flex-wrap max-md:pr-5">
+             <Link to="/"><div>Home</div></Link>
+      <div className="flex gap-5 justify-between">
+      <Link to="/Feedback/Register"><div>Register</div></Link>
+      <Link to="/Feedback/GiveFeedback"> <div>Give Feedback</div></Link>
+     
+      </div>
+    </div>
+            
 
         </div>
     )

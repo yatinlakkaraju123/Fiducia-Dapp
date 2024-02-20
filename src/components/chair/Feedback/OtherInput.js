@@ -67,7 +67,8 @@ settoken(token);
 axios.post("http://localhost:3001/deploy", { smartcontractaddress: addr, token }).then(result => {
     //console.log(result)
 }).catch(err => console.log(err))
-setShowModal(true);
+alert(`Congratulations you have created the feedback form with token no ${token}`)
+//setShowModal(true);
 try {
     const response = await axios.post('http://localhost:3001/sendTokensFeedback', {
         emailArray,
@@ -198,21 +199,50 @@ console.log(ipfs)*/
     }
     return (
         <div>
-              <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Voting Event Created</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Congratulations you have created the feedback form with token no {token}</p>
-        </Modal.Body>
-        <Modal.Footer>
+             <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-black-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <p className='self-start mt-3'>Enter start time for registration process</p>
+               
+               <input type="datetime-local" name="startregisterTime" onChange={handleInputChange} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" />
          
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-            <form onSubmit={submit}>
+           <p className='self-start mt-3'>Enter end time for registration process</p>
+           
+               <input type="datetime-local" name="stopregisterTime" onChange={handleInputChange} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" />
+          
+           <p className='self-start mt-3'>Enter start time for voting process</p>
+          
+               <input type="datetime-local" name="startvotingTime" onChange={handleInputChange} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" />
+          
+           <p className='self-start mt-3'>Enter end time for voting process</p>
+          
+               <input type="datetime-local" name="stopvotingTime" onChange={handleInputChange} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" />
+         
+           <p className='self-start mt-3'>Enter start time for results</p>
+          
+               <input type="datetime-local" name="startresultTime" onChange={handleInputChange} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full" />
+          <p className='self-start mt-3'>Upload a csv file for to allow only certain organization members to participate voting.(Note ensure that the file has three columns with
+               registration no,phone and email in the correct order)</p>
+         
+
+               <input type="file" accept=".csv" onChange={handlefile}  id="myFile" name="filename" />
+
+          
+
+           
+               <button type="submit"  onClick={submit} className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5">Submit</button>
+            </div>
+            </div>
+            </div>
+                 
+               
+          
+        </div>
+    )
+}
+/*
+
+  <form onSubmit={submit}>
                 <p>Enter start time for registration process</p>
                 <div class="input-group mb-3">
                     <input type="datetime-local" name="startregisterTime" onChange={handleInputChange} class="form-control" />
@@ -243,7 +273,4 @@ console.log(ipfs)*/
                 <div class="input-group mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-        </div>
-    )
-}
+            </form>*/

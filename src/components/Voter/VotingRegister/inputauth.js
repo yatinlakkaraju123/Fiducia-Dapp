@@ -66,22 +66,22 @@ export default function Inputauth(props) {
   return (
     <div>
       {inp===0 && <>
-        <form onSubmit={check}>
-        <div className="input-group mb-3">
-          <input
+        <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-zinc-400 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <div className="self-start mt-3">Enter Registration Number</div>
+            <input
             type="text"
             name="regNo"
-            className="form-control"
+            
             onChange={(e) => setRegNo(e.target.value)}
-            placeholder="registration no"
-            aria-label="Event Name"
-            aria-describedby="basic-addon2"
-          /><br></br>
-        </div>
-        <div className="input-group mb-3">
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </div>
-      </form>
+            className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full"
+          />
+            </div>
+            </div>
+            </div>
+             <button type="submit" className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5"onClick={check}>Submit</button>
+      
       </>}
      
       {inp===1 && <OTP data={

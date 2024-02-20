@@ -12,6 +12,7 @@ export default function InputToken() {
   const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
   const submit = async (event) => {
     event.preventDefault();
+    
     axios.get("http://localhost:3001").then(async result=>{
 			const data = result.data;
 			const tokenarr = data.map((d)=>{
@@ -52,22 +53,22 @@ export default function InputToken() {
   return (
     <div className='container'>
       {inp===0 && <>
-        <form onSubmit={submit}>
-        <div class="input-group mb-3">
-          <input type="text" name="tokenNo" class="form-control" onChange={(e) => {
+        <div className="flex flex-col py-3 bg-white">
+          <div className="flex gap-5 justify-between items-start px-px mt-2 w-full text-sm text-black max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col flex-1 self-end px-5 pb-2.5 mt-12 max-md:mt-10 max-md:max-w-full">
+            <div className="self-start mt-3">Enter Token Number</div>
+            <input type="text" name="tokenNo" class="form-control" onChange={(e) => {
             setInputToken(e.target.value)
 
-          }}
+          }} className="shrink-0 mt-6 rounded-3xl border-white border-solid bg-zinc-100 border-[3px] h-[68px] max-md:max-w-full"
 
-            placeholder="token no" aria-label="Event Name" aria-describedby="basic-addon2" /><br></br>
-
-
-
-        </div>
-        <div class="input-group mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-      </form>
+            />
+            <button type="submit" className="justify-center self-center px-14 py-6 mt-8 text-2xl text-black capitalize whitespace-nowrap shadow-sm bg-zinc-300 rounded-[40px] max-md:px-5"
+            onClick={submit}>Submit</button>
+            </div>
+            </div>
+            </div>
+       
       </>}
      {inp===1 &&<InputAuth scaddr={inputSCadd}/>}
     
