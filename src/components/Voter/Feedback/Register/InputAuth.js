@@ -86,14 +86,13 @@ export default function Inputauth(props) {
        
       </>}
      
-      {inp===1 && <OTP data={
-        {
-          scaddr:props.scaddr,
-          Phone:phone,
-          regIndx:regIndx1
-        }
-      }/>}
-    
+      {inp===1 && <InputReg data={
+          {
+            scaddr:props.scaddr,
+            regIndx :regIndx1,}
+          }
+        />}
+    //
     </div>
   );
 }

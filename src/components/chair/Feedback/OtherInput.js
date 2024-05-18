@@ -68,7 +68,7 @@ axios.post("http://localhost:3001/deploy", { smartcontractaddress: addr, token }
     //console.log(result)
 }).catch(err => console.log(err))
 alert(`Congratulations you have created the feedback form with token no ${token}`)
-//setShowModal(true);
+window.location.reload();
 try {
     const response = await axios.post('http://localhost:3001/sendTokensFeedback', {
         emailArray,

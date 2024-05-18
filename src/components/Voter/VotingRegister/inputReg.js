@@ -16,6 +16,7 @@ export default function InputReg(props) {
     const newContract = new web3.eth.Contract(voting.abi, addr);
     await newContract.methods.register().send({from:account});
     alert("Congratulations you have registered yourselves for voting")
+    window.location.reload();
     
   }
   return (

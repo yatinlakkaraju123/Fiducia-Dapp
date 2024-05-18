@@ -240,7 +240,7 @@ function ChairVotingHome() {
       console.log(error);
     }
 
-    //window.location.reload();
+    window.location.reload();
   };
 
   return (
