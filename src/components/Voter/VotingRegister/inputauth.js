@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import voting from '../../chair/voting.json';
 import UseBlockchain from '../../../UseBlockchain.js';
 import OTP from './OTP';
-
+import InputReg from './inputReg.js';
 export default function Inputauth(props) {
   const [regNo, setRegNo] = useState('');
   const [inp,setInp] = useState(0);

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import UseBlockchain from '../../../UseBlockchain.js';
 import voting from '../../chair/voting.json';
 import Button from 'react-bootstrap/Button';
+
 export default function InputReg(props) {
   const [web3, account, loadWeb3, contractAddress] = UseBlockchain();
   const [showModal, setShowModal] = useState(false);

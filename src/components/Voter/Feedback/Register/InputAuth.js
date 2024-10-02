@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import feedback from '../../../chair/Feedback.json';
 import UseBlockchain from '../../../../UseBlockchain.js';
 import OTP from './OTP';
-
+import Reg from './Reg.js';
 export default function Inputauth(props) {
   const [regNo, setRegNo] = useState('');
   const [inp,setInp] = useState(0);
@@ -86,13 +86,13 @@ export default function Inputauth(props) {
        
       </>}
      
-      {inp===1 && <InputReg data={
+      {inp===1 && <Reg data={
           {
             scaddr:props.scaddr,
             regIndx :regIndx1,}
           }
         />}
-    //
+    
     </div>
   );
 }

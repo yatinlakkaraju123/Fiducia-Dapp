@@ -6,16 +6,19 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const SCmodel = require('./models/smartcontractinfo')
 const mypasswords  = require('./.passwords.js')
+
 const app = express()
 const axios = require('axios')
 const FormData = require('form-data')
 const pinataSDK = require('@pinata/sdk');
 const pinata = new pinataSDK({ pinataJWTKey: mypasswords.JWT})
 const fs = require('fs')
+require('dotenv').config();
+
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb://localhost:27017/fiducia")
+mongoose.connect(process.env.MongoURL)
 
 app.get('/',(req,res)=>{
     SCmodel.find({}).then(scinfo=>res.json(scinfo)).catch(err=>res.json(err))
