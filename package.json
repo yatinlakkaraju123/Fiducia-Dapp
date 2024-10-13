@@ -1,7 +1,6 @@
 {
   "name": "fiducia",
   "proxy": "https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/",
-
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +22,8 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.10.4",
     "uuid": "^9.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^4.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
