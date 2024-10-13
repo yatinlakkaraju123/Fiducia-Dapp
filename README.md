@@ -26,6 +26,17 @@ After which the voting page will appear. By clicking load candidates, the candid
 After voting the candidate can view the results.
 ![image](https://github.com/user-attachments/assets/1a1275ce-1dc0-4970-aec5-0a87d697c853)
 The results is shown in the form of bar graph
-
-
+FEEDBACK APPLICATION
+![image](https://github.com/user-attachments/assets/9da4201c-720f-4658-8fbb-99a09c3ef88b)
+Chairperson Feedback Home Page
+![image](https://github.com/user-attachments/assets/1c162889-6ed5-4e4d-b466-3020e3deeea4)
+Chairperson creating feedback form
+Similar to voting process after entering necessary details a smart contract for the feedback event is created and a token number to map the smart contract address is generated and sent to all eligible users via email.
+![image](https://github.com/user-attachments/assets/62b80d92-7d89-4193-9cc8-bd1b25566af9)
+User's feedback home page
+The user then register himself for giving feedback similar to the registration process in voting application
+![image](https://github.com/user-attachments/assets/a12d6a26-6d56-4eb5-9ebd-f9471670efd1)
+Then after registering the user can give his feedback by clicking on load feedback form button which loads the feedback given by the chairperson. The user's feedback will be stored anonymously.
+![image](https://github.com/user-attachments/assets/58d78702-148d-4319-b1be-16149fd6caa3)
+After all users give feedback the chairperson can view the feedbacks without knowing the user who has given the feedback
 
