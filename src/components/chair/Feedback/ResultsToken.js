@@ -11,7 +11,7 @@ export default function ResultsToken() {
     const [inputSCadd,setInputSCadd] = useState('');
     const submit = async(event)=>{
         event.preventDefault();
-        axios.get("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/").then(async result=>{
+        axios.get("http://localhost:3001/").then(async result=>{
                 const data = result.data;
                 const tokenarr = data.map((d)=>{
                     return (d.token)
