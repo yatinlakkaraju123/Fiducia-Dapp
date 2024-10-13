@@ -45,7 +45,7 @@ function ChairVotingHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001")
+      .get("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/")
       .then((result) => {
         const dta = result.data;
         const arr = dta.map((d) => {
@@ -187,7 +187,7 @@ function ChairVotingHome() {
     }
     //console.log(addr);
     axios
-      .post("http://localhost:3001/deploy", {
+      .post("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/deploy", {
         smartcontractaddress: addr,
         token,
       })
@@ -202,7 +202,7 @@ function ChairVotingHome() {
     const emailArray = columnDataArrays[columnArray[2]] || [];
     console.log(emailArray);
     try {
-      const response = await axios.post("http://localhost:3001/sendTokens", {
+      const response = await axios.post("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/sendTokens", {
         emailArray,
         token,
         EventName: FormDetails.eventName,
@@ -240,7 +240,7 @@ function ChairVotingHome() {
       console.log(error);
     }
 
-    window.location.reload();
+    //window.location.reload();
   };
 
   return (

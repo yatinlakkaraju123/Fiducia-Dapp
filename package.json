@@ -1,5 +1,7 @@
 {
   "name": "fiducia",
+  "proxy": "https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/",
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {

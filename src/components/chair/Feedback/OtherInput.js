@@ -64,13 +64,13 @@ while (tokenArray.indexOf(token) != -1) {
 }
 const addr = deployedContract.options.address;
 settoken(token);
-axios.post("http://localhost:3001/deploy", { smartcontractaddress: addr, token }).then(result => {
+axios.post("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/deploy", { smartcontractaddress: addr, token }).then(result => {
     //console.log(result)
 }).catch(err => console.log(err))
 alert(`Congratulations you have created the feedback form with token no ${token}`)
 window.location.reload();
 try {
-    const response = await axios.post('http://localhost:3001/sendTokensFeedback', {
+    const response = await axios.post('https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/sendTokensFeedback', {
         emailArray,
         token,
         EventName: EventName
@@ -97,7 +97,7 @@ try {
       }, [ipfs]);
     useEffect(
         () => {
-            axios.get("http://localhost:3001").then(result => {
+            axios.get("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/").then(result => {
                 const dta = result.data;
                 const arr = dta.map((d) => {
                     return (d.token)
@@ -176,7 +176,7 @@ try {
         })),
       };
         const jsonString = JSON.stringify(jsonData, null, 2);
-await axios.post("http://localhost:3001/sendJSON",{_jsonString:jsonString,token:2}).then(result=>{
+await axios.post("https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/sendJSON",{_jsonString:jsonString,token:2}).then(result=>{
     console.log(result.data.IPFS);
     const updatedIpfs = String(result.data.IPFS);
     setIpfs(updatedIpfs);
@@ -184,7 +184,7 @@ await axios.post("http://localhost:3001/sendJSON",{_jsonString:jsonString,token:
 }).catch(error=>console.log(error.response.data))
 
 /*try {
-    const result = await axios.post('http://localhost:3001/sendIPFS');
+    const result = await axios.post('https://fiducia-dv4pg2hir-yatin-lakkarajus-projects.vercel.app/sendIPFS');
     const updatedIpfs = String(result.data.IPFS);
     setIpfs(updatedIpfs);
     console.log(updatedIpfs);  // Log the updated IPFS hash
